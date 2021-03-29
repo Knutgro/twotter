@@ -2,8 +2,9 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { TwootType } from '../../../types';
 import styles from './styles';
-import { Ionicons} from '@expo/vector-icons';
+import { Ionicons, Entypo } from '@expo/vector-icons';
 import Footer from './Footer';
+import moment from 'moment';
 export type MainContainerProps = {
     twoot: TwootType
 }
@@ -14,7 +15,8 @@ const MainContainer = ({ twoot }: MainContainerProps) => (
             <View style= {styles.twootHeaderNames}>
                 <Text style={styles.name}>{twoot.user.name}</Text>
                 <Text style={styles.username}>@{twoot.user.username}</Text>
-                <Text style={styles.createdAt}> 15s </Text>
+                <Entypo style= {styles.dot} name = {"dot-single"} />
+                <Text style={styles.createdAt}>{moment(twoot.createdAt).fromNow()}</Text>
             </View>
 
             <Ionicons name= {"chevron-down"} size={16} color={"grey"}></Ionicons>

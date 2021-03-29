@@ -1,5 +1,6 @@
 export type RootStackParamList = {
   Root: undefined;
+  NewTwoot: undefined;
   NotFound: undefined;
 };
 

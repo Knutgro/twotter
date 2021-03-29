@@ -3,13 +3,15 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import Twoot from '../components/twoot'
-
+import Twoot from '../components/twoot';
+import Feed from '../components/Feed';
 import twoots from '../data/Twoots';
-export default function TabOneScreen() {
+import NewTwootButton from '../components/NewTwootButton';
+export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Twoot twoot = {twoots[0]} />
+      <Feed />
+      <NewTwootButton />
     </View>
   );
 }

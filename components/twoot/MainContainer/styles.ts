@@ -7,10 +7,11 @@ const styles = StyleSheet.create({
     },
     twootHeaderContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-between'
     },
     twootHeaderNames: {
         flexDirection: 'row',
+        alignItems: 'center'
     },
     name: {
         marginRight: 5,
@@ -27,6 +28,10 @@ const styles = StyleSheet.create({
     content: {
         marginTop: 3,
         lineHeight: 18
+    },
+    dot: {
+        marginRight: 5,
+        color: 'grey',
     },
     image: {
         marginVertical: 10,
