@@ -11,19 +11,25 @@ import NewTwootButton from '../components/NewTwootButton';
 import Colors from '../constants/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProfilePicture from '../components/ProfilePicture';
+import Constants from 'expo-constants';
+import { useNavigation } from '@react-navigation/core';
 export default function NewTweetScreen() {
 
   const [twoot, setTwoot] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const navigation = useNavigation();
   const onPostTwoot = () => {
     console.warn(`Posting the tweet: ${twoot}
     Image: ${imageUrl}`);
   }
+  const statusBarHeight = Constants.statusBarHeight
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <AntDesign name="close" size={30} color={Colors.light.tint}  />
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <AntDesign name="close" size={30} color={Colors.light.tint}  /> 
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={onPostTwoot}>
           <Text style={styles.buttonText}> Twoot </Text>
         </TouchableOpacity>
@@ -55,7 +61,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'flex-start',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
+    marginTop: Constants.statusBarHeight
   },
   headerContainer: {
     width: "100%",
@@ -81,12 +88,14 @@ const styles = StyleSheet.create({
     padding: 15
   },
   inputContainer: {
-    marginLeft: 10
+    marginLeft: 10,
   },
   twootInput: {
     maxHeight: 300,
-    height: 100,
+    maxWidth: 300,
+    height: 50,
     fontSize: 18,
+    top: 0,
   },
   imageInput: {
 
