@@ -1,13 +1,17 @@
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { useEffect, useState } from 'react';
 import * as React from 'react';
+import {API, Auth, graphqlOperation} from 'aws-amplify';
 
+import { getUser } from '../graphql/queries';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/HomeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, HomeNavigatorParamList, TabTwoParamList } from '../types';
+
 import ProfilePicture from '../components/ProfilePicture';
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -63,6 +67,31 @@ function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']
 const TabOneStack = createStackNavigator<HomeNavigatorParamList>();
 
 function HomeNavigator() {
+  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userInfo = await Auth.currentAuthenticatedUser({bypassCache: true});
+      if (!userInfo) {
+        return;
+      }
+
+      try {
+        const userData = await API.graphql(graphqlOperation(getUser, {id: userInfo.attributes.sub}));
+        if (userData) {
+          setUser(userData.data.getUser);
+          console.log(userData);
+        }
+
+      }catch(e) {
+        console.log(e);
+      }
+      
+    }
+
+    fetchUser();
+  }, []);
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
@@ -84,7 +113,7 @@ function HomeNavigator() {
             <MaterialCommunityIcons name = {"star-four-points-outline"} size = {30} color = {Colors.light.tint} />
           ),
           headerLeft: () => (
-            <ProfilePicture size = {40} image = {'https://avatars.githubusercontent.com/u/43546391?v=4'}/>
+            <ProfilePicture size = {40} image = {user?.image}/>
           )
         }}
       />

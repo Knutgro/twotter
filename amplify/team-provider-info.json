@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-twotter-dev-143156-authRole",
+      "UnauthRoleArn": "arn:aws:iam::918052175471:role/amplify-twotter-dev-143156-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::918052175471:role/amplify-twotter-dev-143156-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-twotter-dev-143156-deployment",
+      "UnauthRoleName": "amplify-twotter-dev-143156-unauthRole",
+      "StackName": "amplify-twotter-dev-143156",
+      "StackId": "arn:aws:cloudformation:eu-west-1:918052175471:stack/amplify-twotter-dev-143156/c1cf0a70-908a-11eb-bb18-0a06d87343c7",
+      "AmplifyAppId": "dueyt746rmgtt"
+    },
+    "categories": {
+      "auth": {
+        "twotter6e1e1eba": {}
+      }
+    }
+  }
+}
