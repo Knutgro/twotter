@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 15
+    padding: 14
 
   },
   button: {
