@@ -13,15 +13,26 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import ProfilePicture from '../components/ProfilePicture';
 import Constants from 'expo-constants';
 import { useNavigation } from '@react-navigation/core';
+import {API, Auth, graphqlOperation} from 'aws-amplify';
+import {createTwoot} from '../graphql/mutations';
+import { CreateTwootInput } from '../API';
 export default function NewTweetScreen() {
 
   const [twoot, setTwoot] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const navigation = useNavigation();
-  const onPostTwoot = () => {
-    console.warn(`Posting the tweet: ${twoot}
-    Image: ${imageUrl}`);
+
+  const onPostTwoot = async (twoot: CreateTwootInput) => {
+    try {
+      const currentUser = await Auth.currentAuthenticatedUser({bypassCache: true});
+      await API.graphql(graphqlOperation(createTwoot, {input: twoot}));
+
+
+    }catch(e) {
+      console.log(e);
+    }
   }
+
   const statusBarHeight = Constants.statusBarHeight
 
   return (

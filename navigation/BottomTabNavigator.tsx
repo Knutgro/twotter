@@ -81,7 +81,6 @@ function HomeNavigator() {
         const userData = await API.graphql(graphqlOperation(getUser, {id: userInfo.attributes.sub}));
         if (userData) {
           setUser(userData.data.getUser);
-          console.log(userData);
         }
 
       }catch(e) {
